@@ -1,0 +1,46 @@
+version: 1
+formatters:
+  simple:
+    class: logging.Formatter
+    format: "%(asctime)s %(levelname)s: %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+
+handlers:
+  train_handler_debug:
+    class: logging.FileHandler
+    filename: train_pipeline.log
+    level: DEBUG
+    formatter: simple
+
+  train_handler_warn:
+    class: logging.FileHandler
+    filename: train_pipeline.warn
+    level: WARNING
+    formatter: simple
+
+  report_handler_debug:
+    class: logging.FileHandler
+    filename: eda_report.log
+    level: DEBUG
+    formatter: simple
+
+  report_handler_warn:
+    class: logging.FileHandler
+    filename: eda_report.warn
+    level: WARNING
+    formatter: simple
+
+loggers:
+  train_pipeline:
+    level: DEBUG
+    handlers: [train_handler_debug, train_handler_warn]
+    propagate: no
+
+  eda_report:
+    level: DEBUG
+    handlers: [report_handler_debug, report_handler_warn]
+    propagate: no
+
+root:
+  level: DEBUG
+  handlers: [train_handler_debug]
